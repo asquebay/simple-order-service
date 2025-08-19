@@ -1,0 +1,111 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+/* контейнер-обёртка */
+/* этот элемент отвечает за внешний вид: рамку, фон, тень и т.д. */
+.input-wrapper {
+    position: relative; /* обязательно для позиционирования кнопки внутри */
+    width: 100%;
+    max-width: 400px;
+    display: flex; /* flex для удобного выравнивания */
+    align-items: center;
+    border: 1px solid #d1d5db;
+    border-radius: 1rem;
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+/* динамическая подсветка обёртки */
+/* использую :focus-within, чтобы подсвечивать рамку, когда фокус на поле ввода ВНУТРИ */
+.input-wrapper:focus-within {
+    border-color: #000000;
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05);
+}
+
+/* поле ввода */
+/* поле ввода прозрачное, и оно отвечает только за ввод текста */
+.input-field {
+    width: 100%;
+
+    /* собственные стили оформления убираем */
+    border: none;
+    outline: none;
+    background: transparent;
+
+    /* правый отступ нужен, чтобы текст не заходил под абсолютно спозиционированную кнопку */
+    padding: 1rem 4rem 1rem 1.5rem; /* 4rem справа — это место для кнопки + небольшой зазор */
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #000000;
+}
+
+.input-field::placeholder {
+    color: #9ca3af;
+}
+
+/* кнопка отправки */
+/* кнопка позиционируется абсолютно внутри .input-wrapper */
+.submit-button {
+    position: absolute;
+    /* динамическое вычисление положения и размера кнопки относительно поля */
+    top: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.5rem;
+
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    background-color: #000000;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.submit-button:hover {
+    background-color: #262626;
+}
+
+.submit-button svg {
+    width: 1rem;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    padding: 1rem;
+}
+
+.details-container {
+    width: 100%;
+    max-width: 600px;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-family: monospace;
+    white-space: pre-wrap; /* позволяет переносить длинные строки */
+    word-break: break-all; /* ломает слова, чтобы они не выходили за рамки */
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #111827;
+}
+
+.error-container {
+    width: 100%;
+    max-width: 400px;
+    color: #ef4444;
+    font-weight: 500;
+    text-align: center;
+}

@@ -1,0 +1,20 @@
+http_server:
+  port: ":8081"
+  timeout: 8s # таймаут на чтение/запись
+
+postgres:
+  user: "simple_order_service_manager"
+  password: "secure_password"
+  host: "localhost"
+  port: "5432"
+  db_name: "orders_db"
+  ssl_mode: "disable"
+
+kafka:
+  brokers:
+    - "localhost:9092"
+  topic: "orders" # топик для получения данных о заказах
+  group_id: "simple_order_service_group" # ID группы консьюмеров
+
+logger:
+  level: "debug"
