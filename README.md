@@ -1,7 +1,7 @@
 # simple-order-service
 Сервис обработки заказов на Go, который получает данные о заказах из Kafka, сохраняет их в PostgreSQL, кэширует в памяти для быстрого доступа и отображает через минималистичный веб-интерфейс.
 
-Сервис реализует следующий поток данных:
+Сервис реализует следующий поток данных:\
 ● продюсер (тестовый скрипт) отправляет JSON-сообщение с данными о заказе в топик Kafka;\
 ● консьюмер (основное Go-приложение) подписывается на этот топик, читает сообщение;\
 ● сервис валидирует полученные данные, сохраняет их в базу данных PostgreSQL и помещает в in-memory кэш;\
@@ -29,12 +29,12 @@ git clone https://github.com/asquebay/simple-order-service.git && cd simple-orde
 
 **2.Экспортируем переменные окружения из файла `.env`:**
 ```
-[user@nixos:~/go/src/simple-order-service]$ export $(grep -v '^#' .env | xargs)
+export $(grep -v '^#' .env | xargs)
 ```
 
 **3. Создаём пользователя и базу данных для взамодействия с PostgreSQL:**
 ```
-[user@nixos:~/go/src/simple-order-service]$ sudo -u postgres psql <<-EOSQL
+sudo -u postgres psql <<-EOSQL
   CREATE USER ${POSTGRES_USER} NOSUPERUSER NOCREATEROLE CREATEDB NOINHERIT REPLICATION NOBYPASSRLS CONNECTION LIMIT -1;
   ALTER USER ${POSTGRES_USER} WITH PASSWORD '${POSTGRES_PASSWORD}';
   CREATE DATABASE ${POSTGRES_DB} OWNER ${POSTGRES_USER} ENCODING 'UTF8';
@@ -49,22 +49,22 @@ CREATE DATABASE
 
 **4.1. Установка утилиты для миграций (goose):**
 ```
-[user@nixos:~/go/src/simple-order-service]$ go install github.com/pressly/goose/v3/cmd/goose@v3.24.3
+go install github.com/pressly/goose/v3/cmd/goose@v3.24.3
 ```
 
 **4.2 Проверяем, что goose установился:**
 ```
-[user@nixos:~/go/src/simple-order-service]$ $(go env GOPATH)/bin/goose -h
+$(go env GOPATH)/bin/goose -h
 ```
 *При успешном выполнении мы увидим вывод справки (help) для goose.*\
 *Если же мы увидим, что переменная GOPATH не установлена, то нужно будет её установить (см. https://go.dev/wiki/SettingGOPATH)*:
 ```
-[user@nixos:~/go/src/simple-order-service]$ go env -w GOPATH=$HOME/go
+go env -w GOPATH=$HOME/go
 ```
 
 **5. Применение миграций — создание всех необходимых таблиц в БД:**
 ```
-[user@nixos:~/go/src/simple-order-service]$ $(go env GOPATH)/bin/goose -dir "migrations" postgres "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:5432/${POSTGRES_DB}?sslmode=disable" up
+$(go env GOPATH)/bin/goose -dir "migrations" postgres "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:5432/${POSTGRES_DB}?sslmode=disable" up
 ```
 *При успешном выполнении вывод из терминала будет следующим:*
 ```
@@ -78,7 +78,7 @@ CREATE DATABASE
 Откроем два отдельных терминала (например, Konsole) в корне проекта.\
 В первом терминале запустим основное приложение. Оно подключится к PostgreSQL и Kafka и начнёт слушать входящие сообщения:
 ```
-[user@nixos:~/go/src/simple-order-service]$ go run ./cmd/app/main.go
+go run ./cmd/app/main.go
 ```
 *При успешном запуске мы увидим логи, подтверждающие старт всех компонентов:*
 ```
@@ -94,7 +94,7 @@ time=2025-08-19T19:34:19.124+03:00 level=INFO source=/home/user/go/src/simple-or
 **2. Отправка тестового заказа в Kafka**\
 Во втором терминале запустим тестовый скрипт-продюсер для проверки работоспособности сервера:
 ```
-[user@nixos:~/go/src/simple-order-service]$ go run ./test/kafka/producer.go
+go run ./test/kafka/producer.go
 ```
 *При успешном выполнении вывод из терминала будет следующим:*
 ```
@@ -111,7 +111,7 @@ Message sent successfully!
 
 **2) Через терминал (например, через Konsole)**\
 ```
-[user@nixos:~]$ curl http://localhost:8081/order/a112bbb3c3c44d5test
+curl http://localhost:8081/order/a112bbb3c3c44d5test
 ```
 *При успешном выполнении вывод из терминала будет следующим:*
 ```
