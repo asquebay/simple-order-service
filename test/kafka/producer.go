@@ -17,19 +17,19 @@ func main() {
 
 	// JSON-сообщение
 	message := `{
-           "order_uid": "my-first-test-order-01",
+           "order_uid": "a112bbb3c3c44d5test",
            "track_number": "WBILMTESTTRACK",
            "entry": "WBIL",
-           "delivery": { "name": "Ivan Ivanov", "phone": "+9720000000", "zip": "2639809", "city": "Moscow", "address": "Mira street 15", "region": "Moscow Region", "email": "test@gmail.com" },
-           "payment": { "transaction": "my-first-test-order-01", "request_id": "", "currency": "USD", "provider": "wbpay", "amount": 1817, "payment_dt": 1637907727, "bank": "alpha", "delivery_cost": 1500, "goods_total": 317, "custom_fee": 0 },
-           "items": [ { "chrt_id": 9934930, "track_number": "WBILMTESTTRACK", "price": 453, "rid": "ab4219087a764ae0btest", "name": "Mascaras", "sale": 30, "size": "0", "total_price": 317, "nm_id": 2389222, "brand": "Vivienne Sabo", "status": 202 } ],
+           "delivery": { "name": "NixOS User", "phone": "+79001234567", "zip": "123456", "city": "NixOS City", "address": "Terminal street 1", "region": "Flake", "email": "nixos@example.com" },
+           "payment": { "transaction": "a112bbb3c3c44d5test", "request_id": "", "currency": "RUB", "provider": "mir", "amount": 5000, "payment_dt": 1637907727, "bank": "sber", "delivery_cost": 500, "goods_total": 4500, "custom_fee": 0 },
+           "items": [ { "chrt_id": 12345, "track_number": "WBILMTESTTRACK", "price": 4500, "rid": "some_random_id_123", "name": "NixOS T-Shirt", "sale": 0, "size": "M", "total_price": 4500, "nm_id": 67890, "brand": "Nix", "status": 202 } ],
            "locale": "en",
            "internal_signature": "",
-           "customer_id": "test",
-           "delivery_service": "meest",
-           "shardkey": "9",
-           "sm_id": 99,
-           "date_created": "2021-11-26T06:22:19Z",
+           "customer_id": "nixos_user",
+           "delivery_service": "cdek",
+           "shardkey": "1",
+           "sm_id": 1,
+           "date_created": "2025-08-15T12:00:00Z",
            "oof_shard": "1"
         }`
 
